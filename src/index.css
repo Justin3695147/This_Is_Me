@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+/* This ensures your background stays dark even if the code hasn't loaded yet */
+body {
+  margin: 0;
+  background-color: #050505;
+  color: white;
+}
