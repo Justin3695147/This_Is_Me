@@ -4,7 +4,7 @@ import {
   Trophy, Map, Leaf, Code, GraduationCap, 
   User, Briefcase, Mail, Linkedin, Globe, 
   ChevronRight, Compass, Award, BarChart3,
-  MapPin
+  MapPin, X
 } from 'lucide-react';
 
 const Card = ({ children, color, className = "" }) => (
@@ -23,19 +23,103 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('About');
   const [mapScale, setMapScale] = useState('Singapore');
   const [hoveredExp, setHoveredExp] = useState('systemearth');
+  const [selectedExperience, setSelectedExperience] = useState(null);
 
   const experienceData = {
     singapore: [
-      { id: 'systemearth', company: "SystemEarth", location: "Keong Saik Road, Singapore", role: "Sustainability Intern", desc: "Pioneering EUDR reporting automation for sustainable supply chains and developing geospatial workflows for deforestation-free compliance." },
-      { id: 'tembusu', company: "Tembusu Asia Consulting", location: "One Commonwealth, Singapore", role: "Carbon and Sustainability Intern", desc: "Conducted GHG Inventory audits and prepared sustainability reports aligned with GRI, ISSB S1, S2 frameworks." },
-      { id: 'pasarfish', company: "Pasarfish", location: "Chinatown Complex, Singapore", role: "Research Assistant", desc: "Assisted in research initiatives focused on sustainable seafood markets and community-based fishery data collection." },
-      { id: 'nus', company: "NUS", location: "Kent Ridge, Singapore", role: "Quantitative Reasoning Tutor", desc: "Tutored students in data-driven reasoning and quantitative analysis, simplifying complex statistical concepts." },
+      { 
+        id: 'systemearth', 
+        company: "SystemEarth", 
+        location: "Keong Saik Road, Singapore", 
+        role: "Sustainability Intern", 
+        desc: "Pioneering EUDR reporting automation for sustainable supply chains and developing geospatial workflows for deforestation-free compliance.",
+        longDesc: "Built an automated process to trace supplier sourcing regions and identify deforestation risk. Developed geospatial workflows that converted raw supply chain data into actionable maps and dashboards for sustainability reporting.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/systemearth-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/systemearth-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/systemearth-3.jpg"
+        ]
+      },
+      { 
+        id: 'tembusu', 
+        company: "Tembusu Asia Consulting", 
+        location: "One Commonwealth, Singapore", 
+        role: "Carbon and Sustainability Intern", 
+        desc: "Conducted GHG Inventory audits and prepared sustainability reports aligned with GRI, ISSB S1, S2 frameworks.",
+        longDesc: "Led data collection and validation for Scope 1 & 2 emissions. Produced reporting templates and gap analyses to align client disclosures with ISSB and GRI standards.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/tembusu-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/tembusu-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/tembusu-3.jpg"
+        ]
+      },
+      { 
+        id: 'pasarfish', 
+        company: "Pasarfish", 
+        location: "Chinatown Complex, Singapore", 
+        role: "Research Assistant", 
+        desc: "Assisted in research initiatives focused on sustainable seafood markets and community-based fishery data collection.",
+        longDesc: "Supported field surveys and data analysis for small-scale fisheries. Helped build community dashboards that visualised catch patterns and sustainability indicators.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/pasarfish-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/pasarfish-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/pasarfish-3.jpg"
+        ]
+      },
     ],
     global: [
-      { id: 'asu', company: "Arizona State University", location: "Tempe, USA", role: "Exchange Program (6 Months)", desc: "Engaged in cross-cultural exchange and advanced sustainability coursework in the heart of the Sonoran Desert." },
-      { id: 'thailand', company: "BangSaen Oyster Farmers", location: "Chonburi, Thailand", role: "Impact Experience Program (1 Year)", desc: "Created ecotourism initiatives for local farmers to develop new revenue streams and promote coastal conservation." },
-      { id: 'vnu', company: "Vietnam National University", location: "Ho Chi Minh, Vietnam", role: "ASEAN Undergraduate Network Program", desc: "Sustainability Summer Camp focusing on regional urban resilience and Southeast Asian environmental challenges." },
-      { id: 'bali', company: "Global Experience Program", location: "Bali, Indonesia", role: "Coastal Research (1 Month)", desc: "Immersive study of marine NGOs and coastal livelihoods, serving as the foundation for the award-winning Octopus management project." },
+      { 
+        id: 'asu', 
+        company: "Arizona State University", 
+        location: "Tempe, USA", 
+        role: "Exchange Program (6 Months)", 
+        desc: "Engaged in cross-cultural exchange and advanced sustainability coursework in the heart of the Sonoran Desert.",
+        longDesc: "Completed advanced sustainability modules and collaborated on transdisciplinary urban resilience projects with global peers.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/asu-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/asu-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/asu-3.jpg"
+        ]
+      },
+      { 
+        id: 'thailand', 
+        company: "BangSaen Oyster Farmers", 
+        location: "Chonburi, Thailand", 
+        role: "Impact Experience Program (1 Year)", 
+        desc: "Created ecotourism initiatives for local farmers to develop new revenue streams and promote coastal conservation.",
+        longDesc: "Designed and rolled out oyster farmer ecotours, trained stakeholders in sustainable aquaculture, and measured community income impacts.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/thailand-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/thailand-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/thailand-3.jpg"
+        ]
+      },
+      { 
+        id: 'vnu', 
+        company: "Vietnam National University", 
+        location: "Ho Chi Minh, Vietnam", 
+        role: "ASEAN Undergraduate Network Program", 
+        desc: "Sustainability Summer Camp focusing on regional urban resilience and Southeast Asian environmental challenges.",
+        longDesc: "Collaborated on urban resilience workshops, contributed to regional research briefs, and explored solutions for climate-vulnerable cities.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/vnu-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/vnu-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/vnu-3.jpg"
+        ]
+      },
+      { 
+        id: 'bali', 
+        company: "Global Experience Program", 
+        location: "Bali, Indonesia", 
+        role: "Coastal Research (1 Month)", 
+        desc: "Immersive study of marine NGOs and coastal livelihoods, serving as the foundation for the award-winning Octopus management project.",
+        longDesc: "Conducted field interviews, mapped coastal user groups, and produced recommendations used in the Octopus data collection project.",
+        images: [
+          "https://justin3695147.github.io/MyWebpage/bali-1.jpg",
+          "https://justin3695147.github.io/MyWebpage/bali-2.jpg",
+          "https://justin3695147.github.io/MyWebpage/bali-3.jpg"
+        ]
+      },
     ]
   };
 
@@ -47,10 +131,10 @@ export default function App() {
   ];
 
   const hobbiesData = [
-    { id: 'swim', image: 'https://justin3695147.github.io/Test/Swim.jpg', title: 'Swimming', desc: 'Competing with my NUS College swim teammates in the Inter College Games where we clinched Gold' },
-    { id: 'basketball', image: 'https://justin3695147.github.io/Test/Basketball.jpg', title: 'Basketball', desc: 'Basketball team where we clinched Inter College Games Silver' },
-    { id: 'elk', image: 'https://justin3695147.github.io/Test/Elk.png', title: 'Wildlife Photography', desc: 'Searching for wildlife all across the globe. Picture taken: Yellowstone, Wyoming' },
-    { id: 'asu', image: 'https://justin3695147.github.io/Test/ASU.jpg', title: 'Hiking', desc: 'Hiking up the craziest paths. Picture taken: Brown\'s Peak, Arizona' },
+    { id: 'swim', image: 'https://justin3695147.github.io/MyWebpage/Swim.jpg', title: 'Swimming', desc: 'Competing with my NUS College swim teammates in the Inter College Games where we clinched Gold' },
+    { id: 'basketball', image: 'https://justin3695147.github.io/MyWebpage/Basketball.jpg', title: 'Basketball', desc: 'Basketball team where we clinched Inter College Games Silver' },
+    { id: 'elk', image: 'https://justin3695147.github.io/MyWebpage/Elk.png', title: 'Wildlife Photography', desc: 'Searching for wildlife all across the globe. Picture taken: Yellowstone, Wyoming' },
+    { id: 'asu', image: 'https://justin3695147.github.io/MyWebpage/ASU.jpg', title: 'Hiking', desc: 'Hiking up the craziest paths. Picture taken: Brown\'s Peak, Arizona' },
   ];
 
   return (
@@ -68,7 +152,7 @@ export default function App() {
         <header className="flex flex-col md:flex-row items-center gap-12 mb-20">
           <div className="relative">
             <motion.div initial={{ rotate: -5, scale: 0.9 }} animate={{ rotate: 0, scale: 1 }} className="w-56 h-56 md:w-72 md:h-72 rounded-[3.5rem] overflow-hidden border-2 border-emerald-400/30 p-2 bg-[#111]">
-              <img src="https://justin3695147.github.io/Test/justin.jpg" alt="Justin Kam" className="w-full h-full object-cover rounded-[2.8rem]" onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Justin+Kam"; }} />
+              <img src="https://justin3695147.github.io/MyWebpage/justin.jpg" alt="Justin Kam" className="w-full h-full object-cover rounded-[2.8rem]" onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Justin+Kam"; }} />
             </motion.div>
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-emerald-400 text-black px-6 py-1 rounded-full font-black italic text-sm whitespace-nowrap shadow-lg">
               Yosemite, CA
@@ -160,7 +244,18 @@ export default function App() {
                     <MapPin /> Local Footprint
                   </h2>
                   {experienceData.singapore.map((exp) => (
-                    <Card key={exp.id} color="bg-emerald-400/5 border-emerald-400/10">
+                    <Card
+                      key={exp.id}
+                      color="bg-emerald-400/5 border-emerald-400/10"
+                      className="cursor-pointer"
+                      onClick={() => setSelectedExperience(exp)}
+                    >
+                      <img
+                        src={exp.images?.[0]}
+                        alt={`${exp.company} photo`}
+                        className="w-full h-44 object-cover rounded-2xl mb-4"
+                        onError={(e) => { e.target.src = "https://via.placeholder.com/600x300?text=Experience"; }}
+                      />
                       <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2 block">{exp.location}</span>
                       <h3 className="text-xl font-black italic uppercase leading-none">{exp.company}</h3>
                       <p className="text-sm font-bold text-white/60 mb-4">{exp.role}</p>
@@ -174,7 +269,18 @@ export default function App() {
                     <Globe /> Global Exposure
                   </h2>
                   {experienceData.global.map((exp) => (
-                    <Card key={exp.id} color="bg-blue-400/5 border-blue-400/10">
+                    <Card
+                      key={exp.id}
+                      color="bg-blue-400/5 border-blue-400/10"
+                      className="cursor-pointer"
+                      onClick={() => setSelectedExperience(exp)}
+                    >
+                      <img
+                        src={exp.images?.[0]}
+                        alt={`${exp.company} photo`}
+                        className="w-full h-44 object-cover rounded-2xl mb-4"
+                        onError={(e) => { e.target.src = "https://via.placeholder.com/600x300?text=Experience"; }}
+                      />
                       <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2 block">{exp.location}</span>
                       <h3 className="text-xl font-black italic uppercase leading-none">{exp.company}</h3>
                       <p className="text-sm font-bold text-white/60 mb-4">{exp.role}</p>
@@ -218,6 +324,50 @@ export default function App() {
               </div>
             )}
           </motion.div>
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {selectedExperience && (
+            <motion.div
+              className="fixed inset-0 z-50 flex items-center justify-center p-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <motion.div
+                className="absolute inset-0 bg-black/70"
+                onClick={() => setSelectedExperience(null)}
+              />
+              <motion.div
+                className="relative w-full max-w-3xl max-h-[90vh] overflow-hidden rounded-3xl bg-[#0d0d10] border border-white/10 p-8 shadow-2xl"
+                initial={{ scale: 0.95, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 20 }}
+              >
+                <button
+                  onClick={() => setSelectedExperience(null)}
+                  className="absolute top-4 right-4 p-2 rounded-full bg-white/10 hover:bg-white/20 transition"
+                  aria-label="Close"
+                >
+                  <X size={20} />
+                </button>
+                <h2 className="text-2xl font-black uppercase italic mb-2">{selectedExperience.company}</h2>
+                <p className="text-sm text-gray-400 mb-4">{selectedExperience.role} • {selectedExperience.location}</p>
+                <div className="flex gap-3 overflow-x-auto pb-2 mb-6">
+                  {selectedExperience.images?.map((img) => (
+                    <img
+                      key={img}
+                      src={img}
+                      alt={`${selectedExperience.company} gallery`}
+                      className="h-40 w-64 object-cover rounded-2xl flex-shrink-0"
+                      onError={(e) => { e.target.src = "https://via.placeholder.com/320x200?text=Image"; }}
+                    />
+                  ))}
+                </div>
+                <p className="text-sm text-gray-300 leading-relaxed">{selectedExperience.longDesc}</p>
+              </motion.div>
+            </motion.div>
+          )}
         </AnimatePresence>
 
         <footer className="mt-32 pb-12 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-white/5 pt-12">
