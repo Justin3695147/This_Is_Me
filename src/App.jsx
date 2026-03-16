@@ -60,7 +60,7 @@ export default function App() {
         <header className="flex flex-col md:flex-row items-center gap-12 mb-20">
           <div className="relative">
             <motion.div initial={{ rotate: -5, scale: 0.9 }} animate={{ rotate: 0, scale: 1 }} className="w-56 h-56 md:w-72 md:h-72 rounded-[3.5rem] overflow-hidden border-2 border-emerald-400/30 p-2 bg-[#111]">
-              <img src="/justin.jpg" alt="Justin Kam" className="w-full h-full object-cover rounded-[2.8rem]" onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Justin+Kam"; }} />
+              <img src="./justin.jpg" alt="Justin Kam" className="w-full h-full object-cover rounded-[2.8rem]" onError={(e) => { e.target.src = "https://via.placeholder.com/400?text=Justin+Kam"; }} />
             </motion.div>
             <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-emerald-400 text-black px-6 py-1 rounded-full font-black italic text-sm whitespace-nowrap shadow-lg">
               Yosemite, CA
