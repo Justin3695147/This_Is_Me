@@ -4,7 +4,7 @@ import {
   Trophy, Map, Leaf, Code, GraduationCap, 
   User, Briefcase, Mail, Linkedin, Globe, 
   ChevronRight, Compass, Award, BarChart3,
-  MapPin, X
+  MapPin, X, ChevronLeft
 } from 'lucide-react';
 
 const Card = ({ children, color, className = "" }) => (
@@ -24,6 +24,7 @@ export default function App() {
   const [mapScale, setMapScale] = useState('Singapore');
   const [hoveredExp, setHoveredExp] = useState('systemearth');
   const [selectedExperience, setSelectedExperience] = useState(null);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   const experienceData = {
     singapore: [
@@ -242,19 +243,27 @@ export default function App() {
                     <MapPin /> Local Footprint
                   </h2>
                   {experienceData.singapore.map((exp) => (
-                    <Card key={exp.id} color="bg-emerald-400/5 border-emerald-400/10">
-                      <img
-                        src={exp.images?.[0]}
-                        alt={`${exp.company} photo`}
-                        className="w-full h-44 object-cover rounded-2xl mb-4 cursor-pointer"
-                        onClick={() => setSelectedExperience(exp)}
-                        onError={(e) => { e.target.src = "https://via.placeholder.com/600x300?text=Experience"; }}
-                      />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2 block">{exp.location}</span>
-                      <h3 className="text-xl font-black italic uppercase leading-none">{exp.company}</h3>
-                      <p className="text-sm font-bold text-white/60 mb-4">{exp.role}</p>
-                      <p className="text-sm text-gray-300 leading-relaxed border-l border-emerald-400/30 pl-4">{exp.desc}</p>
-                    </Card>
+                    <motion.div
+                      key={exp.id}
+                      whileHover={{ scale: 1.02, y: -4 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedExperience(exp)}
+                    >
+                      <Card color="bg-emerald-400/5 border-emerald-400/10 hover:bg-emerald-400/10 hover:border-emerald-400/30 transition-all">
+                        <img
+                          src={exp.images?.[0]}
+                          alt={`${exp.company} photo`}
+                          className="w-full h-44 object-cover rounded-2xl mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => setSelectedExperience(exp)}
+                          onError={(e) => { e.target.src = "https://via.placeholder.com/600x300?text=Experience"; }}
+                        />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400 mb-2 block cursor-pointer hover:text-emerald-300 transition-colors">{exp.location}</span>
+                        <h3 className="text-xl font-black italic uppercase leading-none cursor-pointer hover:text-emerald-300 transition-colors">{exp.company}</h3>
+                        <p className="text-sm font-bold text-white/60 mb-4 cursor-pointer hover:text-white/80 transition-colors">{exp.role}</p>
+                        <p className="text-sm text-gray-300 leading-relaxed border-l border-emerald-400/30 pl-4 cursor-pointer hover:text-white transition-colors">{exp.desc}</p>
+                      </Card>
+                    </motion.div>
                   ))}
                 </div>
                 {/* Global Track */}
@@ -263,19 +272,27 @@ export default function App() {
                     <Globe /> Global Exposure
                   </h2>
                   {experienceData.global.map((exp) => (
-                    <Card key={exp.id} color="bg-blue-400/5 border-blue-400/10">
-                      <img
-                        src={exp.images?.[0]}
-                        alt={`${exp.company} photo`}
-                        className="w-full h-44 object-cover rounded-2xl mb-4 cursor-pointer"
-                        onClick={() => setSelectedExperience(exp)}
-                        onError={(e) => { e.target.src = "https://via.placeholder.com/600x300?text=Experience"; }}
-                      />
-                      <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2 block">{exp.location}</span>
-                      <h3 className="text-xl font-black italic uppercase leading-none">{exp.company}</h3>
-                      <p className="text-sm font-bold text-white/60 mb-4">{exp.role}</p>
-                      <p className="text-sm text-gray-400 leading-relaxed border-l border-blue-400/30 pl-4">{exp.desc}</p>
-                    </Card>
+                    <motion.div
+                      key={exp.id}
+                      whileHover={{ scale: 1.02, y: -4 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                      className="cursor-pointer"
+                      onClick={() => setSelectedExperience(exp)}
+                    >
+                      <Card color="bg-blue-400/5 border-blue-400/10 hover:bg-blue-400/10 hover:border-blue-400/30 transition-all">
+                        <img
+                          src={exp.images?.[0]}
+                          alt={`${exp.company} photo`}
+                          className="w-full h-44 object-cover rounded-2xl mb-4 cursor-pointer hover:opacity-90 transition-opacity"
+                          onClick={() => setSelectedExperience(exp)}
+                          onError={(e) => { e.target.src = "https://via.placeholder.com/600x300?text=Experience"; }}
+                        />
+                        <span className="text-[10px] font-black uppercase tracking-widest text-blue-400 mb-2 block cursor-pointer hover:text-blue-300 transition-colors">{exp.location}</span>
+                        <h3 className="text-xl font-black italic uppercase leading-none cursor-pointer hover:text-blue-300 transition-colors">{exp.company}</h3>
+                        <p className="text-sm font-bold text-white/60 mb-4 cursor-pointer hover:text-white/80 transition-colors">{exp.role}</p>
+                        <p className="text-sm text-gray-400 leading-relaxed border-l border-blue-400/30 pl-4 cursor-pointer hover:text-white transition-colors">{exp.desc}</p>
+                      </Card>
+                    </motion.div>
                   ))}
                 </div>
               </div>
@@ -343,23 +360,49 @@ export default function App() {
                 </button>
                 <h2 className="text-2xl font-black uppercase italic mb-2">{selectedExperience.company}</h2>
                 <p className="text-sm text-gray-400 mb-4">{selectedExperience.role} • {selectedExperience.location}</p>
-                <div className="flex gap-3 overflow-x-auto mb-6" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-                  <style>{`
-                    .gallery::-webkit-scrollbar {
-                      display: none;
-                    }
-                  `}</style>
-                  <div className="gallery flex gap-3">
-                    {selectedExperience.images?.map((img) => (
-                      <img
-                        key={img}
-                        src={img}
-                        alt={`${selectedExperience.company} gallery`}
-                        className="h-56 w-80 object-cover rounded-2xl flex-shrink-0"
-                        onError={(e) => { e.target.src = "https://via.placeholder.com/320x200?text=Image"; }}
-                      />
-                    ))}
+                <div className="relative mb-6">
+                  <div className="flex gap-3 overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} id="galleryScroll">
+                    <style>{`
+                      .gallery::-webkit-scrollbar {
+                        display: none;
+                      }
+                    `}</style>
+                    <div className="gallery flex gap-3">
+                      {selectedExperience.images?.map((img) => (
+                        <img
+                          key={img}
+                          src={img}
+                          alt={`${selectedExperience.company} gallery`}
+                          className="h-56 w-80 object-cover rounded-2xl flex-shrink-0"
+                          onError={(e) => { e.target.src = "https://via.placeholder.com/320x200?text=Image"; }}
+                        />
+                      ))}
+                    </div>
                   </div>
+                  {selectedExperience.images?.length > 1 && (
+                    <>
+                      <button
+                        onClick={() => {
+                          const gallery = document.getElementById('galleryScroll');
+                          gallery.scrollBy({ left: -350, behavior: 'smooth' });
+                        }}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-black/80 transition z-10"
+                        aria-label="Scroll left"
+                      >
+                        <ChevronLeft size={24} className="text-gray-800" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          const gallery = document.getElementById('galleryScroll');
+                          gallery.scrollBy({ left: 350, behavior: 'smooth' });
+                        }}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/60 hover:bg-black/80 transition z-10"
+                        aria-label="Scroll right"
+                      >
+                        <ChevronRight size={24} className="text-gray-800" />
+                      </button>
+                    </>
+                  )}
                 </div>
                 <p className="text-sm text-gray-300 leading-relaxed">{selectedExperience.desc}</p>
               </motion.div>
